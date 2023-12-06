@@ -17,6 +17,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.data_siswa.R
 import com.example.data_siswa.ui.theme.Halaman.DestinasiEntry
+import com.example.data_siswa.ui.theme.Halaman.DestinasiHome
 import com.example.data_siswa.ui.theme.Halaman.EntrySiswaScreen
 
 @Composable
