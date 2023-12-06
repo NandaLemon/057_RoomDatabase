@@ -17,9 +17,11 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.data_siswa.R
 import com.example.data_siswa.ui.theme.Halaman.DestinasiEntry
-import com.example.data_siswa.ui.theme.Halaman.DestinasiHome
 import com.example.data_siswa.ui.theme.Halaman.EntrySiswaScreen
-import com.example.data_siswa.ui.theme.Halaman.HomeScreen
+
+import com.example.roomsiswa.ui.theme.halaman.DestinasiHome
+import com.example.roomsiswa.ui.theme.halaman.HomeScreen
+
 
 @Composable
 fun SiswaApp(navController: NavHostController = rememberNavController()) {
@@ -57,8 +59,9 @@ fun HostNavigasi(
 ){
     NavHost(navController=navController, startDestination = DestinasiHome.route,modifier = Modifier)
     {
-        composable(DestinasiHome.route){
-            HomeScreen(navigateToItemEntry = {navController.navigate(DestinasiEntry.route)},
+        composable(DestinasiHome.route) {
+            HomeScreen(
+                navigateToItemEntry = { navController.navigate(DestinasiEntry.route)}
             )
         }
         composable(DestinasiEntry.route){
