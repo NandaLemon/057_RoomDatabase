@@ -19,6 +19,7 @@ import com.example.data_siswa.R
 import com.example.data_siswa.ui.theme.Halaman.DestinasiEntry
 import com.example.data_siswa.ui.theme.Halaman.DestinasiHome
 import com.example.data_siswa.ui.theme.Halaman.EntrySiswaScreen
+import com.example.data_siswa.ui.theme.Halaman.HomeScreen
 
 @Composable
 fun SiswaApp(navController: NavHostController = rememberNavController()) {
