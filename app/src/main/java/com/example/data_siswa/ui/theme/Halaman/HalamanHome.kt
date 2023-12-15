@@ -1,6 +1,7 @@
 package com.example.roomsiswa.ui.theme.halaman
 
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -34,12 +35,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.data_siswa.Navigasi.DestinasiNavigasi
-import com.example.data_siswa.Navigasi.SiswaTopAppBar
 import com.example.data_siswa.R
 import com.example.data_siswa.data.Siswa
 import com.example.data_siswa.model.HomeViewModel
 import com.example.data_siswa.model.PenyediaViewModel
-
+import com.example.roomsiswa.navigasi.SiswaTopAppBar
 
 object DestinasiHome : DestinasiNavigasi {
     override val route = "home"
@@ -51,6 +51,7 @@ object DestinasiHome : DestinasiNavigasi {
 fun HomeScreen(
     navigateToItemEntry: () -> Unit,
     modifier: Modifier = Modifier,
+    onDetailClick: (Int) ->  Unit = {},
     viewModel: HomeViewModel = viewModel(factory = PenyediaViewModel.Factory)
 ) {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
@@ -68,7 +69,8 @@ fun HomeScreen(
             FloatingActionButton(
                 onClick = navigateToItemEntry,
                 shape = MaterialTheme.shapes.medium,
-                modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_large))
+                modifier = Modifier.padding(dimensionResource(id = R
+                    .dimen.padding_large))
             ) {
                 Icon(
                     imageVector = Icons.Default.Add,
@@ -82,7 +84,8 @@ fun HomeScreen(
             itemSiswa = uiStateSiswa.listSiswa,
             modifier = Modifier
                 .padding(innerpadding)
-                .fillMaxSize()
+                .fillMaxSize(),
+            onSiswaClick = onDetailClick
         )
 
     }
@@ -91,7 +94,8 @@ fun HomeScreen(
 @Composable
 fun BodyHome(
     itemSiswa: List<Siswa>,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onSiswaClick: (Int) -> Unit = {}
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -106,7 +110,9 @@ fun BodyHome(
         } else {
             ListSiswa(
                 itemSiswa = itemSiswa,
-                modifier = Modifier.padding(horizontal = dimensionResource(id = R.dimen.padding_small))
+                modifier = Modifier
+                    .padding(horizontal = dimensionResource(id = R.dimen.padding_small)),
+                onItemClick = { onSiswaClick(it.id) }
             )
         }
     }
@@ -115,7 +121,8 @@ fun BodyHome(
 @Composable
 fun ListSiswa(
     itemSiswa: List<Siswa>,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onItemClick: (Siswa) -> Unit
 ) {
     LazyColumn(modifier = Modifier) {
         items(items = itemSiswa, key = { it.id }) { person ->
@@ -123,6 +130,7 @@ fun ListSiswa(
                 siswa = person,
                 modifier = Modifier
                     .padding(dimensionResource(id = R.dimen.padding_small))
+                    .clickable { onItemClick(person) }
             )
         }
     }
